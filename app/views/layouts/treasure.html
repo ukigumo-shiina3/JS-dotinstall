@@ -17,12 +17,18 @@
             cursor: pointer;
             transition: 0.8s;
             margin: 0 8px 8px 0;
+            text-align: center;
+            line-height: 100px; /*テキストが上下左右方向で中央揃え*/
         }
 
-        .circle {
+        .win {
             background: pink;
             border-radius: 50%;
             transform: rotate(360deg); /*要素を回転表示 */
+        }
+
+        .lose {
+            transform: scale(0.9); /*要素を拡大・縮小表示する */
         }
     </style>
 </head>
@@ -34,15 +40,25 @@
     <script>
         'use strict' //ブラウザが厳密なエラーチェック
 
-        const div = document.createElement('div')
-        div.classList.add('box')
+        const num = 5;
+        const winner = Math.floor(Math.random() * num); // 0 -4
 
-        div.addEventListener('click', () => {
-            div.classList.toggle('circle');
-        });
-        
-        document.body.appendChild(div);  //bodyの子要素としてdivを追加してブラウザ表示するという処理
+        for (let i =0; i < num; i++) {
+            const div = document.createElement('div') //HTML要素を動的に生成
+            div.classList.add('box');
 
+            div.addEventListener('click', () => {
+                if (i === winner) {
+                    div.textContent = 'Win!';
+                    div.classList.add('win');
+                } else {
+                    div.textContent = 'Lose!';
+                    div.classList.add('lose');
+                }
+            });
+            
+            document.body.appendChild(div);  //bodyの子要素としてdivを追加してブラウザ表示(HTML要素追加)するという処理
+        }
 
         // const target1 = document.getElementById('target1')
         // const target2 = document.getElementById('target2')
